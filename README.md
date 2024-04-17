@@ -1,5 +1,5 @@
 # local-rag-example
-Build your own ChatPDF and run them locally
+Build ChatPDF and run them locally (ollama)-->gemma:2b
 
 Dependencies:
 - langchain
