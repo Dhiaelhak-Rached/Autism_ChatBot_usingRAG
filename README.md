@@ -15,36 +15,6 @@ pip install langchain streamlit streamlit_chat chromadb pypdf fastembed
 
 Blog post: https://blog.duy-huynh.com/build-your-own-rag-and-run-them-locally/
 
-# A Tutorial On How to Build Your Own RAG and How to Run It Locally: Langchain + Ollama + Streamlit
-With the rise of Large Language Models and their impressive capabilities, many fancy applications are being built on top of giant LLM providers like OpenAI and Anthropic. The myth behind such applications is the RAG framework, which has been thoroughly explained in the following articles:
-
-* Building RAG-based LLM Applications for Production :
-https://www.anyscale.com/blog/a-comprehensive-guide-for-building-rag-based-llm-applications-part-1
-* Retrieval Augmented Generation (RAG) Explained: Understanding Key Concepts
-https://www.datastax.com/guides/what-is-retrieval-augmented-generation
-* What is retrieval-augmented generation
-https://research.ibm.com/blog/retrieval-augmented-generation-RAG
-
-
-To become familiar with RAG, I recommend going through these articles. This post, however, will skip the basics and guide you directly on building your own RAG application that can run locally on your laptop without any worries about data privacy and token cost.
-
-
-We will build an application that is something similar to [ChatPDF](https://www.chatpdf.com/) but simpler. Where users can upload a PDF document and ask questions through a straightforward UI. Our tech stack is super easy with Langchain, Ollama, and Streamlit.
-
-
-* LLM Server: The most critical component of this app is the LLM server. Thanks to [Ollama](https://ollama.ai/), we have a robust LLM Server that can be set up locally, even on a laptop. While [llama.cpp](https://github.com/ggerganov/llama.cpp) is an option, I find Ollama, written in Go, easier to set up and run.
-
-
-* RAG: Undoubtedly, the two leading libraries in the LLM domain are [Langchain](https://python.langchain.com/docs/get_started/introduction) and [LLamIndex](https://www.llamaindex.ai/). For this project, I’ll be using Langchain due to my familiarity with it from my professional experience. An essential component of any RAG framework is vector storage. We’ll be using [Chroma](https://github.com/chroma-core/chroma) here, as it integrates well with Langchain.
-
-
-* Chat UI: The user interface is also an important component. Although there are many technologies available, I prefer using [Streamlit](https://streamlit.io), a Python library, for peace of mind.
-
-
-Okay, let’s start setting it up.
-
---- 
-
 ## Setup Ollama
 
 As mentioned above, setting up and running Ollama is straightforward. First, visit [ollama.ai](https://ollama.ai/) and download the app appropriate for your operating system.
