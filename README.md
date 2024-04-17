@@ -212,4 +212,4 @@ Okay, that’s it! We now have a ChatPDF application that runs entirely on your 
 
 * **Enhance the RAG Pipeline**: There’s room for experimentation within RAG. You might want to change the retrieval metric, the embedding model,.. or add layers like a re-ranker to improve results.
 
-Full source code: https://github.com/vndee/local-rag-example
+
