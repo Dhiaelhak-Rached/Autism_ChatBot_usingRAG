@@ -45,22 +45,18 @@ def page():
         st.session_state["messages"] = []
         st.session_state["assistant"] = ChatPDF()
 
-    st.header("ChatPDF")
+    st.header("Autism ChatBot")
 
-    st.subheader("Upload a document")
-    st.file_uploader(
-        "Upload document",
-        type=["pdf"],
-        key="file_uploader",
-        on_change=read_and_save_file,
-        label_visibility="collapsed",
-        accept_multiple_files=True,
-    )
+
+    file_path ="AutismData.pdf"
 
     st.session_state["ingestion_spinner"] = st.empty()
 
     display_messages()
     st.text_input("Message", key="user_input", on_change=process_input)
+
+    if file_path:
+        st.session_state["assistant"].ingest(file_path)
 
 
 if __name__ == "__main__":

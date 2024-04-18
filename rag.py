@@ -87,22 +87,21 @@ def filter_complex_metadata(
 
     return updated_documents
 
+
 class ChatPDF:
     vector_store = None
     retriever = None
     chain = None
 
     def __init__(self):
-        self.model = ChatOllama(model="gemma:2b")
+        self.model = ChatOllama(model="llama2:7b")
         self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=100)
-        self.prompt = PromptTemplate.from_template(
+        self.prompt_template = PromptTemplate.from_template(
             """
-            <s> [INST] You are an assistant for question-answering tasks. Use the following pieces of retrieved context 
-            to answer the question. If you don't know the answer, just say that you don't know. Use three sentences
-             maximum and keep the answer concise. [/INST] </s> 
-            [INST] Question: {question} 
-            Context: {context} 
-            Answer: [/INST]
+            <s> [INST] You are an empathetic Q&A assistant, here to help you with any questions you have. Your goal is to provide clear and accurate answers, understanding that some questions may need more explanation or patience. Feel free to ask anything you'd like! [/INST] </s> 
+            [INST] You: {user_input} </s>
+            Assistant: 
+
             """
         )
 
@@ -120,16 +119,16 @@ class ChatPDF:
             },
         )
 
-        self.chain = ({"context": self.retriever, "question": RunnablePassthrough()}
-                      | self.prompt
+        self.chain = ({"context": self.retriever, "user_input": RunnablePassthrough()}
+                      | self.prompt_template
                       | self.model
                       | StrOutputParser())
 
-    def ask(self, query: str):
+    def ask(self, user_input: str):
         if not self.chain:
             return "Please, add a PDF document first."
 
-        return self.chain.invoke(query)
+        return self.chain.invoke(user_input)
 
     def clear(self):
         self.vector_store = None
